@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "drivers-helper"
+version = "0.0.1"
+description = ""
+authors = ["Anton Shiryaev <med.phisiker@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "~3.10"
+torch = "^2.1.0"
+torchvision = "^0.16.0"
+ultralytics = "^8.0.209"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
