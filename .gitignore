@@ -161,3 +161,6 @@ cython_debug/
 
 # ignore data
 /data
+
+# ignore models
+/runs
