@@ -511,6 +511,48 @@ test = ["Pillow", "contourpy[test-no-images]", "matplotlib"]
 test-no-images = ["pytest", "pytest-cov", "pytest-xdist", "wurlitzer"]
 
 [[package]]
+name = "cvat-cli"
+version = "2.8.2"
+description = "Command-line client for CVAT"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "cvat-cli-2.8.2.tar.gz", hash = "sha256:c506d865fc2b39a3c415c2204dd1e0f94bfc81c2512e6f206d9e42affa234f39"},
+    {file = "cvat_cli-2.8.2-py3-none-any.whl", hash = "sha256:d3b4d12b0156426b32a25aca2999c6f5f498fed802f266d103914f1272079bb6"},
+]
+
+[package.dependencies]
+cvat-sdk = ">=2.8.2,<2.9.0"
+Pillow = ">=10.0.1"
+setuptools = ">=65.5.1"
+
+[[package]]
+name = "cvat-sdk"
+version = "2.8.2"
+description = "CVAT REST API"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "cvat_sdk-2.8.2-py3-none-any.whl", hash = "sha256:51a4459fe02a0a0b69fbfceda0526a270d254bf73b9fa47aed53fe52f8d628d2"},
+    {file = "cvat_sdk-2.8.2.tar.gz", hash = "sha256:424ecc6b481a3a95485d05ed0e14a1e89938701aa07f5198d84519b3f605843c"},
+]
+
+[package.dependencies]
+attrs = ">=21.4.0"
+packaging = ">=21.3"
+Pillow = ">=10.0.1"
+platformdirs = ">=2.1.0"
+python-dateutil = ">=2.5.3"
+setuptools = ">=21.0.0"
+tqdm = ">=4.64.0"
+tuspy = "0.2.5"
+typing-extensions = ">=4.2.0"
+urllib3 = ">=1.25.3"
+
+[package.extras]
+pytorch = ["torch", "torchvision"]
+
+[[package]]
 name = "cycler"
 version = "0.12.1"
 description = "Composable style cycles"
@@ -1718,6 +1760,21 @@ docs = ["furo", "olefile", "sphinx (>=2.4)", "sphinx-copybutton", "sphinx-inline
 tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "packaging", "pyroma", "pytest", "pytest-cov", "pytest-timeout"]
 
 [[package]]
+name = "platformdirs"
+version = "4.0.0"
+description = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "platformdirs-4.0.0-py3-none-any.whl", hash = "sha256:118c954d7e949b35437270383a3f2531e99dd93cf7ce4dc8340d3356d30f173b"},
+    {file = "platformdirs-4.0.0.tar.gz", hash = "sha256:cb633b2bcf10c51af60beb0ab06d2f1d69064b43abf4c185ca6b28865f3f9731"},
+]
+
+[package.extras]
+docs = ["furo (>=2023.7.26)", "proselint (>=0.13)", "sphinx (>=7.1.1)", "sphinx-autodoc-typehints (>=1.24)"]
+test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest (>=7.4)", "pytest-cov (>=4.1)", "pytest-mock (>=3.11.1)"]
+
+[[package]]
 name = "plotly"
 version = "5.18.0"
 description = "An open-source, interactive data visualization library for Python"
@@ -2883,6 +2940,17 @@ numpy = "*"
 all = ["defusedxml", "fsspec", "imagecodecs (>=2023.8.12)", "lxml", "matplotlib", "zarr"]
 
 [[package]]
+name = "tinydb"
+version = "4.8.0"
+description = "TinyDB is a tiny, document oriented database optimized for your happiness :)"
+optional = false
+python-versions = ">=3.7,<4.0"
+files = [
+    {file = "tinydb-4.8.0-py3-none-any.whl", hash = "sha256:30c06d12383d7c332e404ca6a6103fb2b32cbf25712689648c39d9a6bd34bd3d"},
+    {file = "tinydb-4.8.0.tar.gz", hash = "sha256:6dd686a9c5a75dfa9280088fd79a419aefe19cd7f4bd85eba203540ef856d564"},
+]
+
+[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
@@ -2990,6 +3058,28 @@ dev = ["pytest (>=6)", "pytest-cov", "pytest-timeout", "pytest-xdist"]
 notebook = ["ipywidgets (>=6)"]
 slack = ["slack-sdk"]
 telegram = ["requests"]
+
+[[package]]
+name = "tuspy"
+version = "0.2.5"
+description = "A Python client for the tus resumable upload protocol ->  http://tus.io"
+optional = false
+python-versions = "*"
+files = [
+    {file = "tuspy-0.2.5-py3-none-any.whl", hash = "sha256:8ce106dd139ac77a097e8728f15f90d99df7408d9e67ac780ce44aefb9b5dd8d"},
+    {file = "tuspy-0.2.5.tar.gz", hash = "sha256:1f238f65d444c0688f57e1dd704d9aa11cf5747eec33669e917627150170b9b8"},
+]
+
+[package.dependencies]
+certifi = ">=2018.1.18"
+future = ">=0.16.0"
+requests = ">=2.18.4"
+six = ">=1.11.0"
+tinydb = ">=3.5.0"
+
+[package.extras]
+dev = ["Sphinx (==1.7.1)", "sphinx-autobuild (==0.7.1)", "tox (>=2.3.1)"]
+test = ["coverage (>=4.2)", "mock (>=2.0.0)", "pytest (>=3.0.3)", "pytest-cov (>=2.3.1,<2.6)", "responses (>=0.5.1)"]
 
 [[package]]
 name = "typing-extensions"
@@ -3263,4 +3353,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "f95e0179cbfac425a3a865b7819eb1ae76191462bc250083e709e51bde979795"
+content-hash = "f29cadb6365c87ae2f263763aecdcb3dace69d014f9f44a1931d54b14a8dc465"
