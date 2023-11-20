@@ -16,3 +16,23 @@ poetry install
 ```
 poetry shell
 ```
+
+# Загрузить данные в CVAT
+
+train
+```
+cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 create "RSTD_train" --labels data/cvat/labels.json --image_quality 100 --annotation_path data/cvat/labels.xml --annotation_format "CVAT 1.1" local data.zip
+```
+
+val
+```
+cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 create "RSTD_val" --labels data/cvat/labels.json --image_quality 100 --annotation_path data/cvat/labels.xml --annotation_format "CVAT 1.1" local data.zip
+```
+
+download dataset
+```
+cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 dump --format "YOLO 1.1" 117 RTSD_val_yolo.zip
+```
+
+
+
