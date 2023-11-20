@@ -21,6 +21,6 @@ print(dataset.head())
 
 # Export the dataset
 dataset.export(
-    export_dir="yolo",
-    dataset_type=fo.types.YOLOv5Dataset
+    export_dir="data/cvat",
+    dataset_type=fo.types.CVATImageDataset
 )
