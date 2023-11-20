@@ -29,9 +29,14 @@ val
 cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 create "RSTD_val" --labels data/cvat/labels.json --image_quality 100 --annotation_path data/cvat/labels.xml --annotation_format "CVAT 1.1" local data.zip
 ```
 
+filtered val
+```
+cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 create "RSTD_val_filtered" --labels data/RTSD_val_cvat_filtered/labels.json --image_quality 100 --annotation_path data/RTSD_val_cvat_filtered/labels.xml --annotation_format "CVAT 1.1" local data.zip
+```
+
 download dataset
 ```
-cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 dump --format "YOLO 1.1" 117 RTSD_val_yolo.zip
+cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 dump --format "COCO 1.0" --with-images True 117 RTSD_val_coco.zip
 ```
 
 
