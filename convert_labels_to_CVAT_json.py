@@ -9,8 +9,8 @@ def read_json(filename: str):
 
 
 if __name__ == "__main__":
-    input_rtsd_json_labels_path = "./data/label_map.json"
-    output_cvat_json_path = "./data/cvat/labels.json"
+    input_rtsd_json_labels_path = "data/RTSD/label_map.json"
+    output_cvat_json_path = "data/RSTD_cvat_val/label.json"
 
     label_to_num_mapping = read_json(input_rtsd_json_labels_path)
 
