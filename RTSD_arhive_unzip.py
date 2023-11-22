@@ -1,10 +1,9 @@
 import zipfile
-import shutil
 import os
 
 
 if __name__ == "__main__":
-    # zip arhive of RSTD Dataset
+    # zip archive of RSTD Dataset
     zip_path = "data/archive.zip"
     dest_dir_path = "data/RTSD"
 
