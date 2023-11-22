@@ -109,5 +109,55 @@ download dataset
 cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 dump --format "COCO 1.0" --with-images True 117 RTSD_val_coco.zip
 ```
 
+# Обучение модели
 
+Для обучения модели запустим скрипт `yolov8_train.py`.
 
+В результате была обучена модель на распознавание данных классов:
+
+```
+5_19_1
+2_1
+5_16
+5_15_2
+3_24
+2_4
+3_27
+1_23
+4_1_1
+5_20
+3_20
+5_15_3
+5_15_1
+5_15_2_2
+1_17
+4_2_3
+5_15_5
+4_2_1
+4_1_4
+7_3
+6_4
+6_16
+```
+
+## Полученные метрики модели
+
+* Сonfusion matrix normalized
+![confusion_matrix_normalized](repo_pics/confusion_matrix_normalized.png)
+
+* precision(B), recall(B), mAP50(B), mAP50-95(B), val/box_loss, val/cls_loss, val/dfl_loss
+![metrics](repo_pics/metrics.png)
+
+* Precision-Recall curve
+![PR_curve](repo_pics/PR_curve.png)
+
+* F1-confidence calibration curve
+![F1_curve](repo_pics/F1_curve.png)
+
+* Precision-confidence calibration curve
+![P_curve](repo_pics/P_curve.png)
+
+* Precision-confidence calibration curve
+![R_curve](repo_pics/R_curve.png)
+
+Скачать веса модели можно по данной ссылке ([ссылка](https://disk.yandex.ru/d/X7PqqG7LZUhI7Q)).
