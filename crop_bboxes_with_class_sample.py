@@ -69,7 +69,7 @@ if __name__ == "__main__":
 
     create_dir(output_dir)
     for num in classes:
-        class_dir_path = os.path.join(output_dir, classes[num])
+        class_dir_path = os.path.join(output_dir, f"{num}-{classes[num]}")
         create_dir(class_dir_path)
         classes_dir_paths[num] = class_dir_path
 
