@@ -2,6 +2,44 @@
 
 Прототип помощника для водителей, который будет оповещать их о дорожных знаках.
 
+# Структура проекта
+
+Структура проекта была создана под вдохновением от `Cookiecutter Data Science template` ([link](https://github.com/drivendata/cookiecutter-data-science)).
+
+Исходная структура данного шаблона показалась нам перегруженной для небольшого проекта со сроком выполнения 2 недели.
+
+Мы создали упрощенный вариант, который всегда может быть расширен, компонентами структуры исходного шаблона по мере необходимости и развития проекта.
+
+Структура нашего проекта выгладит так
+
+```
+├── LICENSE            <- The MIT License (MIT).
+├── README.md          <- Описание проекта README ля других разработчиков использующих проект.
+├── data
+│   ├── analysis       <- Данные используемые для анализа. Например, кропы с представителями классов дорожных знаков.
+│   ├── external       <- Данные из других источников. Например, видео с YouTube для теста работы нашей модели.
+│   ├── interim        <- Преобразованные датасеты для более удобного использования, но еще не в форме для обучения модели.
+│   ├── processed      <- Финальная версия датасета используемая для обучения моделей.
+│   └── raw            <- Датасеты в своей исходной форме.
+│
+├── models             <- Обученные и сериализованные модели и их метрики.
+│
+├── notebooks          <- Jupyter notebooks. Ноутбуки для исследования и анализа данных.
+│
+├── reports            <- Отчеты по анализу данных в виде Excel, HTML, PDF, LaTeX, etc.
+│   └── figures        <- Графики и диаграммы в виде картинок используемые для отчетов или документации.
+│
+├── pyproject.toml     <- Мы используем poetry для создания виртуальной среды для разработки.
+│
+├── src                <- Source code используемый в данном проекте.
+    │
+    ├── data           <- Скрипты для обработки данных
+    │
+    ├── models         <- Скрипты для обучения моделей и упаковки их в архив для сохранения в облаке.
+    │
+    └── visualization  <- Скрипты для визуализации данных. Например, для визуализации кропов классов дорожных знаков.
+```
+
 # Развернуть рабочее окружение
 
 Проект использует `poetry` для управления зависимостями.
@@ -54,7 +92,7 @@ cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_val
 
 После этого средствами `CVAT` мы собрали статистику по встречаемости классов, оказалось что некоторых классов пренебрежимо мало.
 
-![RTSD_train_subset_classes_distribution](repo_pics/RTSD_train_subset_classes_distribution.jpg)
+![RTSD_train_subset_classes_distribution](reports/figures/RTSD_train_subset_classes_distribution.jpg)
 
 Выбрали классы которые по количеству размеченных на них bbox составляли не менее 1% от всех bbox датасета.
 
@@ -143,7 +181,7 @@ cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 dump --format "
 ```
 
 Визуализация 20 кропов представителей каждого из классов
-![classes_visualize](repo_pics/classes_visualize.jpg)
+![classes_visualize](reports/figures/classes_visualize.jpg)
 
 Визуализация получена последовательным применением скриптов
 
@@ -155,22 +193,22 @@ cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 dump --format "
 ## Полученные метрики модели
 
 * Сonfusion matrix normalized
-![confusion_matrix_normalized](repo_pics/confusion_matrix_normalized.png)
+![confusion_matrix_normalized](reports/figures/confusion_matrix_normalized.png)
 
 * precision(B), recall(B), mAP50(B), mAP50-95(B), val/box_loss, val/cls_loss, val/dfl_loss
-![metrics](repo_pics/metrics.png)
+![metrics](reports/figures/metrics.png)
 
 * Precision-Recall curve
-![PR_curve](repo_pics/PR_curve.png)
+![PR_curve](reports/figures/PR_curve.png)
 
 * F1-confidence calibration curve
-![F1_curve](repo_pics/F1_curve.png)
+![F1_curve](reports/figures/F1_curve.png)
 
 * Precision-confidence calibration curve
-![P_curve](repo_pics/P_curve.png)
+![P_curve](reports/figures/P_curve.png)
 
 * Precision-confidence calibration curve
-![R_curve](repo_pics/R_curve.png)
+![R_curve](reports/figures/R_curve.png)
 
 Скачать веса модели можно по данной ссылке ([ссылка](https://disk.yandex.ru/d/X7PqqG7LZUhI7Q)).
 
