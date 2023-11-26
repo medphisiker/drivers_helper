@@ -153,7 +153,7 @@ cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 dump --format "
 
 # Обучение модели
 
-Для обучения модели запустим скрипт `yolov8_train.py`.
+Для обучения модели запустим скрипт `src/models/yolov8_train.py`.
 
 В результате была обучена модель на распознавание данных классов:
 
@@ -187,8 +187,8 @@ cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 dump --format "
 
 Визуализация получена последовательным применением скриптов
 
-* для вырезания указанного количества кропов с представителями каждого класса `crop_bboxes_with_class_sample.py`
-* для визуализации указанного количества кропов с представителями каждого класса `visualize_classes_samples.py`
+* для вырезания указанного количества кропов с представителями каждого класса `src/visualization/crop_bboxes_with_class_sample.py`
+* для визуализации указанного количества кропов с представителями каждого класса `src/visualization/visualize_classes_samples.py`
 
 на датасете для обучения `YOLOv8`.
 
