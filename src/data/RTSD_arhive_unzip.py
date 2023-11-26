@@ -4,8 +4,8 @@ import os
 
 if __name__ == "__main__":
     # zip archive of RSTD Dataset
-    zip_path = "data/archive.zip"
-    dest_dir_path = "data/RTSD"
+    zip_path = "data/raw/archive.zip"
+    dest_dir_path = "data/interim/RTSD"
 
     # MS COCO FiftyOne structure
     frames_dir_src = "rtsd-frames"

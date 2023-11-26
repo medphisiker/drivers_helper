@@ -1,10 +1,9 @@
-import os
 import zipfile
 
 from data_utils import zip_directory
 
 if __name__ == "__main__":
-    dir_path = "data/RTSD_val_cvat_filtered/data"
+    dir_path = "data/interim/RTSD_cvat_train/data"
 
     archive_path = dir_path + ".zip"
     zip_file = zipfile.ZipFile(archive_path, "w")
