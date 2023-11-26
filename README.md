@@ -92,7 +92,7 @@ cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_val
 ```
 # Распределение классов в RTSD датасете
 
-После этого средствами `CVAT` мы собрали статистику по встречаемости классов, оказалось что некоторых классов пренебрежимо мало.
+После этого средствами `CVAT` мы собрали статистику по встречаемости классов, оказалось, что некоторых классов пренебрежимо мало.
 
 ![RTSD_train_subset_classes_distribution](reports/figures/RTSD_train_subset_classes_distribution.jpg)
 
@@ -102,28 +102,28 @@ cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_val
 
 # Фильтрация классов по количеству представителей
 
-* профильтруем датасет по классам, выполнив скрипт `RTSD_dataset_CVAT_filter_by_labels.py` для 
-  1. `data/RSTD_cvat_train`
-  2. `data/RSTD_cvat_val`
+* профильтруем датасет по классам, выполнив скрипт `src/data/RTSD_dataset_CVAT_filter_by_labels.py` для 
+  1. `data/interim/RTSD_cvat_train`
+  2. `data/interim/RTSD_cvat_val`
 
 получим датасеты только с тем классами, которые мы решили оставить:
-  1. `data/RTSD_train_cvat_filtered`
-  2. `data/RTSD_val_cvat_filtered`
+  1. `data/processed/RTSD_train_cvat_filtered`
+  2. `data/processed/RTSD_val_cvat_filtered`
 
-* создаем файл `label.json` описания классов для `task` на разметку в `CVAT` (`create_labels_for_CVAT_json.py`) для 
-  1. `data/RTSD_train_cvat_filtered`
-  2. `data/RTSD_val_cvat_filtered`
+* создаем файл `label.json` описания классов для `task` на разметку в `CVAT` (`src/data/create_labels_for_CVAT_json.py`) для 
+  1. `data/processed/RTSD_train_cvat_filtered`
+  2. `data/processed/RTSD_val_cvat_filtered`
 
-* архивируем папки с картинками (`images_folder_arhivier.py`) для 
-  1. `data/RTSD_train_cvat_filtered`
-  2. `data/RTSD_val_cvat_filtered`
+* архивируем папки с картинками (`src/data/images_folder_arhivier.py`) для 
+  1. `data/processed/RTSD_train_cvat_filtered`
+  2. `data/processed/RTSD_val_cvat_filtered`
 
 # Загрузить данные с отобранными классами в CVAT
 
 Загрузим в `CVAT` `train`-подвыборку с помощью `cvat-cli` выполнив команду:
 
 ```
-cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_train_filtered" --labels data/RTSD_train_cvat_filtered/labels.json --image_quality 100 --annotation_path data/RTSD_train_cvat_filtered/labels.xml --annotation_format "CVAT 1.1" local data/RTSD_train_cvat_filtered/data.zip
+cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_train_filtered" --labels data/processed/RTSD_train_cvat_filtered/labels.json --image_quality 100 --annotation_path data/processed/RTSD_train_cvat_filtered/labels.xml --annotation_format "CVAT 1.1" local data/processed/RTSD_train_cvat_filtered/data.zip
 ```
 где 
 * `USER` - логин администратора `CVAT`
@@ -132,7 +132,7 @@ cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_tra
 
 Загрузим в `CVAT` `val`-подвыборку с помощью `cvat-cli` выполнив команду:
 ```
-cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_val_filtered" --labels data/RTSD_val_cvat_filtered/labels.json --image_quality 100 --annotation_path data/RTSD_val_cvat_filtered/labels.xml --annotation_format "CVAT 1.1" local data/RTSD_val_cvat_filtered/data.zip
+cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_val_filtered" --labels data/processed/RTSD_val_cvat_filtered/labels.json --image_quality 100 --annotation_path data/processed/RTSD_val_cvat_filtered/labels.xml --annotation_format "CVAT 1.1" local data/processed/RTSD_val_cvat_filtered/data.zip
 ```
 
 # Преобразовать train и val подвыборки для обучения YOLOv8
