@@ -1,13 +1,15 @@
-import cv2
 import os
+import sys
+
+import cv2
 import matplotlib.pyplot as plt
 
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "data"))
 import data_utils as utils
-from data_utils import list_files
 
 if __name__ == "__main__":
-    crop_dir_path = "data/crop_output"
-    yaml_file_path = "data/RSTD_filtered_yolov5/dataset.yaml"
+    crop_dir_path = "data/analysis/crop_output"
+    yaml_file_path = "data/processed/RSTD_filtered_yolov5/dataset.yaml"
     class_samples_num = 20
 
     # получаем пути к картинкам
@@ -20,7 +22,7 @@ if __name__ == "__main__":
     # считываем примеры кропов классов
     images = []
     for num in classes:
-        images_paths = list_files(classes_dir_paths[num])[:class_samples_num]
+        images_paths = utils.list_files(classes_dir_paths[num])[:class_samples_num]
 
         for image_path in images_paths:
             image = cv2.imread(image_path)
@@ -55,4 +57,4 @@ if __name__ == "__main__":
             )
 
     plt.subplots_adjust(left, bottom, right, top, wspace, hspace)
-    plt.savefig("classes_visualize.jpg", dpi=400)
+    plt.savefig("reports/figures/classes_visualize.jpg", dpi=400)

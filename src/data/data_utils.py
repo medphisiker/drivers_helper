@@ -1,3 +1,4 @@
+import json
 import os
 
 import cv2
@@ -11,6 +12,21 @@ def read_classes_txt(classes_txt_path):
             classes.append(line.strip())
 
     return classes
+
+
+def read_json(filename: str):
+    with open(filename) as f_in:
+        dct_data = json.load(f_in)
+
+    return dct_data
+
+
+def get_fiftyones_json_path(json_src_path):
+    json_dir = os.path.split(json_src_path)[0]
+    fiftyones_json_name = "labels.json"
+    result_json_path = os.path.join(json_dir, fiftyones_json_name)
+
+    return result_json_path
 
 
 def zip_directory(folder_path, zip_file):

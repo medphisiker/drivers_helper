@@ -59,24 +59,26 @@ poetry shell
 
 Скачиваем датасет `Russian traffic sign images dataset (RSTD)` c `Kaggle` ([ссылка](https://www.kaggle.com/datasets/watchman/rtsd-dataset)) для детекции дорожных знаков России.
 
+Располагаем `archive.zip` датасета по пути `data/raw/archive.zip`.
+
 https://www.kaggle.com/datasets/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign/
 
 # Преобразование данных
 
-* разархивируем датасет и преобразуем его структуру под `FiftyOne's MS COCO ` формат (`RTSD_arhive_unzip.py`)
-* преобразуем `train` и `val` подвыборки датасета `RSTD` с помощью `RTSD_dataset_COCO_to_CVAT_convert.py` из `MS COCO` -> `CVAT images`
-* создаем файл `label.json` описания классов для `task` на разметку в `CVAT` (`convert_labels_to_CVAT_json.py`) для 
-  1. `data/RSTD_cvat_train`
-  2. `data/RSTD_cvat_val`
-* архивируем папки с картинками (`images_folder_arhivier.py`) для 
-  1. `data/RSTD_cvat_train`
-  2. `data/RSTD_cvat_val`
+* разархивируем датасет и преобразуем его структуру под `FiftyOne's MS COCO ` формат (`src/data/RTSD_arhive_unzip.py`)
+* преобразуем `train` и `val` подвыборки датасета `RSTD` с помощью `src/data/RTSD_dataset_COCO_to_CVAT_convert.py` из `MS COCO` -> `CVAT images`
+* создаем файл `label.json` описания классов для `task` на разметку в `CVAT` (`src/data/convert_labels_to_CVAT_json.py`) для 
+  1. `data/interim/RTSD_cvat_train`
+  2. `data/interim/RTSD_cvat_val`
+* архивируем папки с картинками (`src/data/images_folder_arhivier.py`) для 
+  1. `data/interim/RTSD_cvat_train`
+  2. `data/interim/RTSD_cvat_val`
 
 # Загрузить данные в CVAT
 
 Загрузим в `CVAT` `train`-подвыборку с помощью `cvat-cli` выполнив команду:
 ```
-cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_train" --labels data/RSTD_cvat_train/label.json --image_quality 100 --annotation_path data/RSTD_cvat_train/labels.xml --annotation_format "CVAT 1.1" local data/RSTD_cvat_train/data.zip
+cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_train" --labels data/interim/RTSD_cvat_train/label.json --image_quality 100 --annotation_path data/interim/RTSD_cvat_train/labels.xml --annotation_format "CVAT 1.1" local data/interim/RTSD_cvat_train/data.zip
 ```
 где 
 * `USER` - логин администратора `CVAT`
@@ -86,11 +88,11 @@ cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_tra
 
 Загрузим в `CVAT` `val`-подвыборку с помощью `cvat-cli` выполнив команду:
 ```
-cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_val" --labels data/RSTD_cvat_val/label.json --image_quality 100 --annotation_path data/RSTD_cvat_val/labels.xml --annotation_format "CVAT 1.1" local data/RSTD_cvat_val/data.zip
+cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_val" --labels data/interim/RTSD_cvat_val/label.json --image_quality 100 --annotation_path data/interim/RTSD_cvat_val/labels.xml --annotation_format "CVAT 1.1" local data/interim/RTSD_cvat_val/data.zip
 ```
 # Распределение классов в RTSD датасете
 
-После этого средствами `CVAT` мы собрали статистику по встречаемости классов, оказалось что некоторых классов пренебрежимо мало.
+После этого средствами `CVAT` мы собрали статистику по встречаемости классов, оказалось, что некоторых классов пренебрежимо мало.
 
 ![RTSD_train_subset_classes_distribution](reports/figures/RTSD_train_subset_classes_distribution.jpg)
 
@@ -100,28 +102,28 @@ cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_val
 
 # Фильтрация классов по количеству представителей
 
-* профильтруем датасет по классам, выполнив скрипт `RTSD_dataset_CVAT_filter_by_labels.py` для 
-  1. `data/RSTD_cvat_train`
-  2. `data/RSTD_cvat_val`
+* профильтруем датасет по классам, выполнив скрипт `src/data/RTSD_dataset_CVAT_filter_by_labels.py` для 
+  1. `data/interim/RTSD_cvat_train`
+  2. `data/interim/RTSD_cvat_val`
 
 получим датасеты только с тем классами, которые мы решили оставить:
-  1. `data/RTSD_train_cvat_filtered`
-  2. `data/RTSD_val_cvat_filtered`
+  1. `data/processed/RTSD_train_cvat_filtered`
+  2. `data/processed/RTSD_val_cvat_filtered`
 
-* создаем файл `label.json` описания классов для `task` на разметку в `CVAT` (`create_labels_for_CVAT_json.py`) для 
-  1. `data/RTSD_train_cvat_filtered`
-  2. `data/RTSD_val_cvat_filtered`
+* создаем файл `label.json` описания классов для `task` на разметку в `CVAT` (`src/data/create_labels_for_CVAT_json.py`) для 
+  1. `data/processed/RTSD_train_cvat_filtered`
+  2. `data/processed/RTSD_val_cvat_filtered`
 
-* архивируем папки с картинками (`images_folder_arhivier.py`) для 
-  1. `data/RTSD_train_cvat_filtered`
-  2. `data/RTSD_val_cvat_filtered`
+* архивируем папки с картинками (`src/data/images_folder_arhivier.py`) для 
+  1. `data/processed/RTSD_train_cvat_filtered`
+  2. `data/processed/RTSD_val_cvat_filtered`
 
 # Загрузить данные с отобранными классами в CVAT
 
 Загрузим в `CVAT` `train`-подвыборку с помощью `cvat-cli` выполнив команду:
 
 ```
-cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_train_filtered" --labels data/RTSD_train_cvat_filtered/labels.json --image_quality 100 --annotation_path data/RTSD_train_cvat_filtered/labels.xml --annotation_format "CVAT 1.1" local data/RTSD_train_cvat_filtered/data.zip
+cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_train_filtered" --labels data/processed/RTSD_train_cvat_filtered/labels.json --image_quality 100 --annotation_path data/processed/RTSD_train_cvat_filtered/labels.xml --annotation_format "CVAT 1.1" local data/processed/RTSD_train_cvat_filtered/data.zip
 ```
 где 
 * `USER` - логин администратора `CVAT`
@@ -130,18 +132,18 @@ cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_tra
 
 Загрузим в `CVAT` `val`-подвыборку с помощью `cvat-cli` выполнив команду:
 ```
-cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_val_filtered" --labels data/RTSD_val_cvat_filtered/labels.json --image_quality 100 --annotation_path data/RTSD_val_cvat_filtered/labels.xml --annotation_format "CVAT 1.1" local data/RTSD_val_cvat_filtered/data.zip
+cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_val_filtered" --labels data/processed/RTSD_val_cvat_filtered/labels.json --image_quality 100 --annotation_path data/processed/RTSD_val_cvat_filtered/labels.xml --annotation_format "CVAT 1.1" local data/processed/RTSD_val_cvat_filtered/data.zip
 ```
 
 # Преобразовать train и val подвыборки для обучения YOLOv8
 
-Преобразуем датасеты с отобранными классами 
-  1. `data/RTSD_train_cvat_filtered`
-  2. `data/RTSD_val_cvat_filtered`
+Преобразуем датасеты с отобранными классами
+  1. `data/processed/RTSD_train_cvat_filtered`
+  2. `data/processed/RTSD_val_cvat_filtered`
 
-в формат датасета `YOLOv5` c помощью скрипта `RTSD_dataset_CVAT_to_YOLOv5_convert.py`.
+в формат датасета `YOLOv5` c помощью скрипта `src/data/RTSD_dataset_CVAT_to_YOLOv5_convert.py`.
 
-В результате получим датасет `data/RSTD_filtered_yolov5` который будет содержать сразу `train` и `val` подвыборки.
+В результате получим датасет `data/processed/RSTD_filtered_yolov5`, который будет содержать сразу `train` и `val` подвыборки.
 
 # Скачаем датасеты с отобранными классами
 download dataset
@@ -151,7 +153,7 @@ cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 dump --format "
 
 # Обучение модели
 
-Для обучения модели запустим скрипт `yolov8_train.py`.
+Для обучения модели запустим скрипт `src/models/yolov8_train.py`.
 
 В результате была обучена модель на распознавание данных классов:
 
@@ -185,8 +187,8 @@ cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 dump --format "
 
 Визуализация получена последовательным применением скриптов
 
-* для вырезания указанного количества кропов с представителями каждого класса `crop_bboxes_with_class_sample.py`
-* для визуализации указанного количества кропов с представителями каждого класса `visualize_classes_samples.py`
+* для вырезания указанного количества кропов с представителями каждого класса `src/visualization/crop_bboxes_with_class_sample.py`
+* для визуализации указанного количества кропов с представителями каждого класса `src/visualization/visualize_classes_samples.py`
 
 на датасете для обучения `YOLOv8`.
 

@@ -1,20 +1,13 @@
-import fiftyone as fo
 import os
 
-
-def get_fiftyones_json_path(json_src_path):
-    json_dir = os.path.split(json_src_path)[0]
-    fiftyones_json_name = "labels.json"
-    result_json_path = os.path.join(json_dir, fiftyones_json_name)
-
-    return result_json_path
-
+import fiftyone as fo
+from data_utils import get_fiftyones_json_path
 
 if __name__ == "__main__":
     dataset_name = "RSTD"
-    dataset_dir = "data/RTSD"
+    dataset_dir = "data/interim/RTSD"
     subset = "train"  # 'train', 'val'
-    json_path_src = "data/RTSD/train_anno.json"
+    json_path_src = "data/interim/RTSD/train_anno.json"
 
     # rename annotation MS COCO json to FiftyOne's MS COCO naming standardА
     json_path = get_fiftyones_json_path(json_path_src)
@@ -40,5 +33,6 @@ if __name__ == "__main__":
 
     # Export the dataset
     dataset.export(
-        export_dir=f"data/RSTD_cvat_{subset}", dataset_type=fo.types.CVATImageDataset
+        export_dir=f"{dataset_dir}_cvat_{subset}",
+        dataset_type=fo.types.CVATImageDataset,
     )

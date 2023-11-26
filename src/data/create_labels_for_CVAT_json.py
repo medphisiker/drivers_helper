@@ -4,7 +4,7 @@ from data_utils import read_classes_txt
 
 if __name__ == "__main__":
     classes_txt_path = "include_classes.txt"
-    output_cvat_json_path = "data/RTSD_train_cvat_filtered/labels.json"
+    output_cvat_json_path = "data/processed/RTSD_val_cvat_filtered/labels.json"
 
     include_classes = read_classes_txt(classes_txt_path)
 

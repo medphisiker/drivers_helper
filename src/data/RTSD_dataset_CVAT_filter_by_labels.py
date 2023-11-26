@@ -5,9 +5,9 @@ from data_utils import read_classes_txt
 
 if __name__ == "__main__":
     name = "RTSD"
-    dataset_dir = "data/RSTD_cvat_train"
+    dataset_dir = "data/interim/RTSD_cvat_val"
     classes_txt_path = "include_classes.txt"
-    export_dir_name = "data/RTSD_train_cvat_filtered"
+    export_dir_name = "data/processed/RTSD_val_cvat_filtered"
 
     include_classes = read_classes_txt(classes_txt_path)
 

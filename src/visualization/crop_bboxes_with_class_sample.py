@@ -1,13 +1,15 @@
 import os
+import sys
 
 import cv2
 
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "data"))
 import data_utils as utils
 
 if __name__ == "__main__":
-    yaml_file_path = "data/RSTD_filtered_yolov5/dataset.yaml"
-    images_dir_path = "data/RSTD_filtered_yolov5/images/train"
-    output_dir = "data/crop_output"
+    yaml_file_path = "data/processed/RSTD_filtered_yolov5/dataset.yaml"
+    images_dir_path = "data/processed/RSTD_filtered_yolov5/images/train"
+    output_dir = "data/analysis/crop_output"
     count_value = 20
 
     classes = utils.read_yaml(yaml_file_path)["names"]
