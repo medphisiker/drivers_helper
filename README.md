@@ -137,13 +137,13 @@ cvat-cli --auth USER --server-host IP-ADRESS --server-port 8080 create "RSTD_val
 
 # Преобразовать train и val подвыборки для обучения YOLOv8
 
-Преобразуем датасеты с отобранными классами 
-  1. `data/RTSD_train_cvat_filtered`
-  2. `data/RTSD_val_cvat_filtered`
+Преобразуем датасеты с отобранными классами
+  1. `data/processed/RTSD_train_cvat_filtered`
+  2. `data/processed/RTSD_val_cvat_filtered`
 
-в формат датасета `YOLOv5` c помощью скрипта `RTSD_dataset_CVAT_to_YOLOv5_convert.py`.
+в формат датасета `YOLOv5` c помощью скрипта `src/data/RTSD_dataset_CVAT_to_YOLOv5_convert.py`.
 
-В результате получим датасет `data/RSTD_filtered_yolov5` который будет содержать сразу `train` и `val` подвыборки.
+В результате получим датасет `data/processed/RSTD_filtered_yolov5`, который будет содержать сразу `train` и `val` подвыборки.
 
 # Скачаем датасеты с отобранными классами
 download dataset
