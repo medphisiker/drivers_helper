@@ -213,6 +213,7 @@ cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 dump --format "
 ![R_curve](reports/figures/R_curve.png)
 
 Скачать веса модели можно по данной ссылке ([ссылка](https://disk.yandex.ru/d/X7PqqG7LZUhI7Q)).
+Данный архив был получен скриптом `src/models/model_arhivier.py`.
 
 ## Таблица результатов
 

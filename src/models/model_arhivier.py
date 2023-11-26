@@ -1,11 +1,12 @@
 import os
+import sys
 import zipfile
 
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "data"))
 from data_utils import zip_directory
 
-
 if __name__ == "__main__":
-    dir_path = "runs/detect/train"
+    dir_path = "models/train"
     archive_path = "yolov8s_with_metrics.zip"
 
     zip_file = zipfile.ZipFile(archive_path, "w")
