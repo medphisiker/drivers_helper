@@ -160,9 +160,9 @@ cython_debug/
 #.idea/
 
 # ignore data
-/data/*
+/data/*/*/
+*.zip
 
 # ignore models
-/runs
+/models/*/
 *.pt
-*.zip
