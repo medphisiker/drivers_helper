@@ -236,3 +236,16 @@ cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 dump --format "
 | 18    | 0.85588        | 0.44461        | 0.82019        | 0.93013              | 0.9254            | 0.96666          | 0.73371             | 0.80207      | 0.39526      | 0.80865      | 0.00208   | 0.00208   | 0.00208   |
 | 19    | 0.83945        | 0.42945        | 0.81814        | 0.9287               | 0.92807           | 0.96861          | 0.73764             | 0.79885      | 0.39125      | 0.80803      | 0.001585  | 0.001585  | 0.001585  |
 | 20    | 0.8248         | 0.41468        | 0.81698        | 0.93057              | 0.92947           | 0.96961          | 0.73911             | 0.79494      | 0.38833      | 0.80735      | 0.00109   | 0.00109   | 0.00109   |
+
+# drivers_helper
+Inference class
+
+predict_on_image - predicts on image, as easy as predict_on_image(image)
+
+predict_and_draw_image - draws an image with bboxes, as in previous example, press any key to exit
+
+predict_on_video - predicts on video, predict_on_video(video)
+
+predict_and_display_video - displays video with bboxes, as previous example, press any key to exit
+
+parse_video_detections(detection_results) - counts number of each class instance per frame, static method, needs predict_on_video results
