@@ -1,11 +1,11 @@
-from ultralytics import YOLO
+import cv2
 import numpy as np
 import pandas as pd
-import cv2
+from ultralytics import YOLO
 
-class OVino_YOLO_inference_class():
 
-    def __init__(self, model_path, task='detect'):
+class OVino_YOLO_inference_class:
+    def __init__(self, model_path, task="detect"):
         self.net = YOLO(model_path, task=task)
 
     def predict_on_image(self, img):
@@ -19,23 +19,28 @@ class OVino_YOLO_inference_class():
             boxes = result.boxes.cpu().numpy()
             xyxys = boxes.xyxy
             for xyxy in xyxys:
-                cv2.rectangle(some_frame, (int(xyxy[0]), int(xyxy[1])), (int(xyxy[2]), int(xyxy[3])), (255, 0, 0), 3)
+                cv2.rectangle(
+                    some_frame,
+                    (int(xyxy[0]), int(xyxy[1])),
+                    (int(xyxy[2]), int(xyxy[3])),
+                    (255, 0, 0),
+                    3,
+                )
 
-        cv2.imshow('img', some_frame)
+        cv2.imshow("img", some_frame)
 
-        while (True):
+        while True:
             k = cv2.waitKey(0)
             if k == -1:  # if no key was pressed, -1 is returned
                 continue
             else:
                 break
-        cv2.destroyWindow('img')
+        cv2.destroyWindow("img")
 
     def predict_on_video(self, video):
         return self.net.predict(video)
 
     def predict_and_display_video(self, video, frame_stride=10):
-
         cap = cv2.VideoCapture(video)
         counter = 0
         boxes = []
@@ -52,11 +57,17 @@ class OVino_YOLO_inference_class():
                 boxes = result.boxes.cpu().numpy()
                 xyxys = boxes.xyxy
                 for xyxy in xyxys:
-                    cv2.rectangle(frame, (int(xyxy[0]), int(xyxy[1])), (int(xyxy[2]), int(xyxy[3])), (255, 0, 0), 3)
+                    cv2.rectangle(
+                        frame,
+                        (int(xyxy[0]), int(xyxy[1])),
+                        (int(xyxy[2]), int(xyxy[3])),
+                        (255, 0, 0),
+                        3,
+                    )
 
-            cv2.imshow('video feed', frame)
+            cv2.imshow("video feed", frame)
 
-            if cv2.waitKey(1) & 0xFF == ord('q'):
+            if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
 
         cap.release()
@@ -68,13 +79,19 @@ class OVino_YOLO_inference_class():
         frame_counter = 0
         classes_names = detection_results[0].names
         for result in detection_results:
-            dict_of_frames_detections[f'frame_{frame_counter}'] = {}
+            dict_of_frames_detections[f"frame_{frame_counter}"] = {}
             detected_classes_instances = result.boxes.data[:, 5].to(int)
             for class_instance_label in detected_classes_instances:
-                if result.names[int(class_instance_label)] in dict_of_frames_detections[
-                    f'frame_{frame_counter}'].keys():
-                    dict_of_frames_detections[f'frame_{frame_counter}'][result.names[int(class_instance_label)]] += 1
+                if (
+                    result.names[int(class_instance_label)]
+                    in dict_of_frames_detections[f"frame_{frame_counter}"].keys()
+                ):
+                    dict_of_frames_detections[f"frame_{frame_counter}"][
+                        result.names[int(class_instance_label)]
+                    ] += 1
                 else:
-                    dict_of_frames_detections[f'frame_{frame_counter}'][result.names[int(class_instance_label)]] = 1
+                    dict_of_frames_detections[f"frame_{frame_counter}"][
+                        result.names[int(class_instance_label)]
+                    ] = 1
             frame_counter += 1
         return dict_of_frames_detections
