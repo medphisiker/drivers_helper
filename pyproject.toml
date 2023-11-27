@@ -15,6 +15,12 @@ boto3 = "^1.26.142"
 fiftyone = "^0.22.3"
 pyyaml = "^6.0.1"
 cvat-cli = "^2.8.2"
+ipykernel = "^6.26.0"
+onnx = "^1.15.0"
+onnxruntime = "^1.16.3"
+onnxsim = "^0.4.35"
+onnxruntime-gpu = "^1.16.3"
+openvino-dev = "^2023.2.0"
 
 
 [build-system]

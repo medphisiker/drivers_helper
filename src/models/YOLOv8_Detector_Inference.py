@@ -1,12 +1,10 @@
 import cv2
-import numpy as np
-import pandas as pd
 from ultralytics import YOLO
 
 
-class OVino_YOLO_inference_class:
-    def __init__(self, model_path, task="detect"):
-        self.net = YOLO(model_path, task=task)
+class YOLOv8_Detector_Inference:
+    def __init__(self, model_path):
+        self.net = YOLO(model_path, task="detect")
 
     def predict_on_image(self, img):
         return self.net.predict(img)
@@ -27,15 +25,7 @@ class OVino_YOLO_inference_class:
                     3,
                 )
 
-        cv2.imshow("img", some_frame)
-
-        while True:
-            k = cv2.waitKey(0)
-            if k == -1:  # if no key was pressed, -1 is returned
-                continue
-            else:
-                break
-        cv2.destroyWindow("img")
+        return some_frame
 
     def predict_on_video(self, video):
         return self.net.predict(video)
