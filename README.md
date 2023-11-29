@@ -5,7 +5,26 @@
 # Демо работы сервиса
 
 Визуализация обнаружения дорожных знаков и уведомления для водителя
+
 ![drivers_helper](reports/figures/drivers_helper.gif)
+
+Смотрите полные демо видео работы сервиса на его YouTube-плейлисте ([ссылка](https://www.youtube.com/playlist?list=PL71idmSpGAF2KZyzZCrsFtyJgqmPQf2od))
+
+Или отдельные демо видео:
+
+* `Дождливый день` ([ссылка](https://youtu.be/50yaGraEC7Y))
+* `Туманный день` [ссылка](https://youtu.be/QewrhndoVB4))
+* `Обычный день` ([ссылка](https://youtu.be/yxUIReCDUUs))
+
+
+# Источники тестовых видео
+
+Список видео с видеорегистраторов, используемых для тестов:
+
+* `test_standard_1.mp4`, взято с YouTube([ссылка](https://www.youtube.com/watch?v=Tn6wfxCwpJs)).
+* `test_fog_video_1.mp4`, взято с YouTube([ссылка](https://youtu.be/0HzLYJfZhaY?si=16iuOrlp5prSFsRf)).
+* `test_rain_video_1.mp4`, взято с YouTube([ссылка](https://www.youtube.com/watch?v=MX420R0y5Vc)).
+
 
 # Структура проекта
 
@@ -262,14 +281,14 @@ cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 dump --format "
 
 Все тесты производились на CPU `12th Gen Intel(R) Core(TM) i5-12600`.
 
-| Device-CPU          | preprocess ms | inference ms | loss ms | postprocess ms | mask map50-95 | mask map50 | mask map75 | size Mb|
-|---------------------|---------------|--------------|---------|----------------|---------------|------------|------------|--------|
-| PyTorch fuse        | 0.1           | 37.0         | 0       | 0.3            | 0.742         | 0.97       | 0.893      | 21.5   |
-| ONNX                | 0.4           | 62.0         | 0       | 1.8            | 0.738         | 0.967      | 0.888      | 42.7   |
-| ONNX Simplify       | 0.3           | 66.8         | 0       | 0.8            | 0.738         | 0.967      | 0.888      | 42.6   |
-| ONNX Simplify half  | 0.4           | 62.7         | 0       | 0.9            | 0.738         | 0.967      | 0.888      | 42.6   |
-| OpenVino            | 0.3           | 45.1         | 0       | 0.4            | 0.738         | 0.967      | 0.888      | 42.8   |
-| OpenVino half       | 0.3           | 44.7         | 0       | 0.4            | 0.738         | 0.967      | 0.888      | 21.6   |
+| Device-CPU         | preprocess ms | inference ms | loss ms | postprocess ms | mask map50-95 | mask map50 | mask map75 | size Mb |
+| ------------------ | ------------- | ------------ | ------- | -------------- | ------------- | ---------- | ---------- | ------- |
+| PyTorch fuse       | 0.1           | 37.0         | 0       | 0.3            | 0.742         | 0.97       | 0.893      | 21.5    |
+| ONNX               | 0.4           | 62.0         | 0       | 1.8            | 0.738         | 0.967      | 0.888      | 42.7    |
+| ONNX Simplify      | 0.3           | 66.8         | 0       | 0.8            | 0.738         | 0.967      | 0.888      | 42.6    |
+| ONNX Simplify half | 0.4           | 62.7         | 0       | 0.9            | 0.738         | 0.967      | 0.888      | 42.6    |
+| OpenVino           | 0.3           | 45.1         | 0       | 0.4            | 0.738         | 0.967      | 0.888      | 42.8    |
+| OpenVino half      | 0.3           | 44.7         | 0       | 0.4            | 0.738         | 0.967      | 0.888      | 21.6    |
 
 По результатам тестов видно, что самой быстрой моделью является `PyTorch fuse`.
 
