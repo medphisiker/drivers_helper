@@ -1,12 +1,6 @@
 import json
 import yaml
-
-
-def read_json(filename: str):
-    with open(filename) as f_in:
-        dct_data = json.load(f_in)
-
-    return dct_data
+from data_utils import read_json
 
 
 if __name__ == "__main__":
