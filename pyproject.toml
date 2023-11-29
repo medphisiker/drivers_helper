@@ -21,6 +21,7 @@ onnxruntime = "^1.16.3"
 onnxsim = "^0.4.35"
 onnxruntime-gpu = "^1.16.3"
 openvino-dev = "^2023.2.0"
+lapx = "^0.5.5"
 
 
 [build-system]

@@ -2,6 +2,11 @@
 
 Прототип помощника для водителей, который будет оповещать их о дорожных знаках.
 
+# Демо работы сервиса
+
+Визуализация обнаружения дорожных знаков и уведомления для водителя
+![drivers_helper](reports/figures/drivers_helper.gif)
+
 # Структура проекта
 
 Структура проекта была создана под вдохновением от `Cookiecutter Data Science template` ([link](https://github.com/drivendata/cookiecutter-data-science)).
@@ -274,15 +279,8 @@ cvat-cli --auth USER --server-host IP-ADRESS  --server-port 8080 dump --format "
 
 Квантизация в `float16` для `ONNX` и `OpenVino` пока не работает в `ultralytics=="8.0.209"`.
 
-# drivers_helper
-Inference class
+# Инференс класс для обученных нейронных сетей
 
-predict_on_image - predicts on image, as easy as predict_on_image(image)
+Инференс класс представлен в `src/models/YOLOv8_Detector_Inference.py`.
 
-predict_and_draw_image - draws an image with bboxes, as in previous example, press any key to exit
-
-predict_on_video - predicts on video, predict_on_video(video)
-
-predict_and_display_video - displays video with bboxes, as previous example, press any key to exit
-
-parse_video_detections(detection_results) - counts number of each class instance per frame, static method, needs predict_on_video results
+Благодаря его методу `predict_on_video_and_viz` были сгенерированы демо видео сервиса помощника для водителя.
