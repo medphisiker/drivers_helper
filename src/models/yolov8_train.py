@@ -1,6 +1,6 @@
 from ultralytics import YOLO
 
-model = YOLO("yolov8s.pt")
+model = YOLO("yolov8n.pt")
 
 res = model.train(
     data="data/processed/RSTD_filtered_yolov5/dataset.yaml",
