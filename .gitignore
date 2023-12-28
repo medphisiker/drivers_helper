@@ -164,7 +164,7 @@ cython_debug/
 *.zip
 
 # ignore models
-/models/*/
+/models/*/*/*
 *.pt
 *runs*
 
