@@ -170,3 +170,6 @@ cython_debug/
 
 # ignore videos
 *.mp4
+
+# ignore vs code settings
+.vscode
