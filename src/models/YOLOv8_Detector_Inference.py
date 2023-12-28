@@ -1,4 +1,5 @@
 import json
+import os
 from collections import deque
 
 import cv2
@@ -235,9 +236,9 @@ class YOLOv8DetectorInference:
 
 if __name__ == "__main__":
     image_path = "data/external/autosave01_02_2012_09_22_38.jpg"
-    video_path = "data/external/test_rain_video_1.mp4"
+    video_path = "data/external/test_fog_video_1.mp4"
 
-    model_path = "models/train/weights/best.pt"
+    model_path = "models/yolov8n_1024/weights/best.pt"
     model_font_path = "models/fonts/PTSans-Regular.ttf"
     messages_path = "models/messages/messages_for_signs.json"
 
@@ -247,4 +248,5 @@ if __name__ == "__main__":
     image = model.predict_on_image_and_viz(image_path)
     cv2.imwrite("test.jpg", image)
 
-    model.predict_on_video_and_viz(video_path, "output_video.mp4", num_frames=None)
+    output_video_path = "_preds".join(os.path.splitext(video_path))
+    model.predict_on_video_and_viz(video_path, output_video_path, num_frames=None)
