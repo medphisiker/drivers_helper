@@ -9,6 +9,6 @@ res = model.train(
     workers=12,
     patience=5,
     seed=20,
-    imgsz=640,
-    project="models",
+    imgsz=1024,
+    project="models/models",
 )
