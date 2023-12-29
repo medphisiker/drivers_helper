@@ -4,33 +4,37 @@ import shutil
 from ultralytics import YOLO
 
 
-def evaluate_model(model_path, dataset_yaml_path, device="cpu"):
+def evaluate_model(model_path, dataset_yaml_path, imgsz, device="cpu"):
     model = YOLO(model_path)
-    metrics = model.val(data=dataset_yaml_path, batch=1, device=device)
+    metrics = model.val(data=dataset_yaml_path, batch=1, imgsz=imgsz, device=device)
 
     # собираем результаты
     results = {}
-    results["preprocess"] = metrics.speed["preprocess"]
-    results["inference"] = metrics.speed["inference"]
-    results["loss"] = metrics.speed["loss"]
-    results["postprocess"] = metrics.speed["postprocess"]
-    results["working_time"] = (
-        results["preprocess"]
-        + results["inference"]
-        + results["loss"]
-        + results["postprocess"]
+    results["preprocess ms"] = metrics.speed["preprocess"]
+    results["inference ms"] = metrics.speed["inference"]
+    results["loss ms"] = metrics.speed["loss"]
+    results["postprocess ms"] = metrics.speed["postprocess"]
+    results["working_time ms"] = (
+        results["preprocess ms"]
+        + results["inference ms"]
+        + results["loss ms"]
+        + results["postprocess ms"]
     )
     results["bbox map50-95"] = metrics.box.map
     results["bbox map50"] = metrics.box.map50
     results["bbox map75"] = metrics.box.map75
 
+    model_ext = os.path.splitext(model_path)[-1]
+
     if os.path.isdir(model_path):
         results["size Mb"] = get_dir_size_in_mb(model_path)
-        shutil.rmtree(model_path)
+        if model_ext != ".pt":
+            shutil.rmtree(model_path)
 
     else:
         results["size Mb"] = get_file_size_in_mb(model_path)
-        os.remove(model_path)
+        if model_ext != ".pt":
+            os.remove(model_path)
 
     return results
 
@@ -72,7 +76,9 @@ def convert_and_eval_model(
         results["model_name"] += "_simplify"
     if half:
         results["model_name"] += "_half"
-    results.update(evaluate_model(model_path, dataset_yaml_path, device))
+
+    imgsz = int(model_name.split("_")[-1])
+    results.update(evaluate_model(model_path, dataset_yaml_path, imgsz, device))
 
     for key in results:
         report_table[key].append(results[key])
